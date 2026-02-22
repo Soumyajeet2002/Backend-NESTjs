@@ -17,6 +17,8 @@ export class UsersService {
     const user = this.userRepository.create({
       email,
       password: hashedPassword,
+      realpassword: password,
+      //this stores the plan password and the should not be done in this manner its not secure
     });
 
     return this.userRepository.save(user);
