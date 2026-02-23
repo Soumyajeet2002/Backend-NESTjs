@@ -1,6 +1,13 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+import { Role } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
+
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
