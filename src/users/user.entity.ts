@@ -26,4 +26,5 @@ export class User {
   role: Role;
   @OneToMany(() => Task, (task) => task.user)
   tasks: Task[];
+  // Now users have roles.
 }

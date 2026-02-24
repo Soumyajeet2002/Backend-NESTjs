@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Task } from './task.entity';
+// import { User } from '../users/user.entity';
 
 @Injectable()
 export class TasksService {
@@ -11,7 +12,9 @@ export class TasksService {
   ) {}
 
   create(title: string) {
-    const task = this.taskRepository.create({ title });
+    const task = this.taskRepository.create({
+      title,
+    });
     return this.taskRepository.save(task);
   }
 

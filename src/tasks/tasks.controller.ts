@@ -27,8 +27,12 @@ export class TasksController {
     return this.tasksService.findOne(Number(id));
   }
 
+  @Role('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.tasksService.remove(Number(id));
+
+    // USER → cannot delete
+    // ADMIN → can delete
   }
 }
