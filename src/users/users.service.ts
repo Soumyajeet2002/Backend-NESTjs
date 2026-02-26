@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import { User, Role } from './user.entity';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -11,13 +11,15 @@ export class UsersService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(email: string, password: string) {
+  async create(email: string, password: string, role: Role = Role.USER) {
+    // adding a role called user / by default
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = this.userRepository.create({
       email,
       password: hashedPassword,
       realpassword: password,
+      role,
       //this stores the plan password and the should not be done in this manner its not secure
     });
 
